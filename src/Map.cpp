@@ -54,3 +54,17 @@ void Map::DrawMap()const{
         }
     }
 }
+
+std::vector<Vector2>Map::GetEnemyPath() const{
+    std::vector<Vector2> path;
+
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            if (grid[y][x] == 1) { // Assuming '1' marks the path in the grid
+                path.push_back(Vector2{ static_cast<float>(x * 32), static_cast<float>(y * 32) });
+            }
+        }
+    }
+    
+    return path;
+}
