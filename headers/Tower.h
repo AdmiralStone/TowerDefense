@@ -5,13 +5,14 @@
 #include "raylib.h"
 #include <vector>
 #include "Enemy.h"
+#include "Projectile.h"
 
 class Tower{
     public:
         Tower(Vector2 position, float range, int damage, float fireRate);
         ~Tower();
 
-        void Update(float deltaTime, std::vector<Enemy>& enemies);
+        void Update(float deltaTime, std::vector<Enemy>& enemies , std::vector<Projectile>& projectiles);
         void Draw() const;
 
 
@@ -23,7 +24,7 @@ class Tower{
         float cooldown;   // Time remaining until the next shot
 
         bool IsInRange(const Enemy& enemy)const; // Check if an enemy is in range
-        void Shoot(Enemy& enemy);                // Shoot at enemy
+        void Shoot(Enemy& enemy, std::vector<Projectile>& projectiles);                // Shoot at enemy
 
 };
 

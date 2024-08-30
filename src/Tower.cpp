@@ -10,7 +10,7 @@ Tower::~Tower(){
     // Destructor logic if needed
 }
 
-void Tower::Update(float deltaTime, std::vector<Enemy>&enemies){
+void Tower::Update(float deltaTime, std::vector<Enemy>&enemies, std::vector<Projectile>& projectiles){
     // Reduce cooldown by the time elapsed
     cooldown -= deltaTime;
 
@@ -18,7 +18,7 @@ void Tower::Update(float deltaTime, std::vector<Enemy>&enemies){
     if(cooldown <= 0.0f){
         for(auto& enemy: enemies){
             if(enemy.IsAlive() && IsInRange(enemy)){
-                Shoot(enemy);
+                Shoot(enemy,projectiles);
                 cooldown = 1.0f/fireRate; // Reset cooldown based on the fire rate
                 break; // Shoot only one enemy per update
             }
@@ -37,6 +37,7 @@ bool Tower::IsInRange(const Enemy& enemy)const{
     return distance <= range;
 }
 
-void Tower::Shoot(Enemy& enemy){
-    enemy.TakeDamage(damage);
+void Tower::Shoot(Enemy& enemy, std::vector<Projectile>& projectiles){
+    // Create a new projectile aimed at enemy
+    projectiles.push_back(Projectile(position,300.0f,damage, &enemy));
 }

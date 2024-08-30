@@ -5,13 +5,13 @@
 
 GameManager::GameManager(){
     // Constructor logic if needed
-    map = new Map(25,18); // Example map of 25x18 tiles
+    map = std::make_unique<Map>(25,18); // Example map of 25x18 tiles
     
 }
 
 GameManager::~GameManager(){
     // Destructor logic if needede
-    delete map;
+
 }
 
 void GameManager::Init(){
@@ -45,8 +45,16 @@ void GameManager::Update(){
 
     // Update towers
     for(auto& tower: towers){
-        tower.Update(deltaTime,enemies);
+        tower.Update(deltaTime,enemies, projectiles);
     }
+
+    // Update projectiles
+    for(auto& projectile:projectiles){
+        projectile.Update(deltaTime);
+    }
+
+    // Remove inactive projectiles
+    projectiles.erase(std::remove_if(projectiles.begin(), projectiles.end(), [](const Projectile& p){ return !p.IsActive(); }) , projectiles.end());
 }
 
 void GameManager::Draw(){
@@ -66,6 +74,11 @@ void GameManager::Draw(){
     // Draw towers
     for(const auto& tower: towers){
         tower.Draw();
+    }
+
+    // Draw projectile
+    for(const auto& projectile:projectiles){
+        projectile.Draw();
     }
 
     EndDrawing();
