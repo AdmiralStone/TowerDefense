@@ -1,7 +1,9 @@
 // src/Enemy.cpp
 #include "Enemy.h"
 #include "raylib.h"
-#include "raymath.h" // Include Raymath for vector operations
+#include "raymath.h"
+#include <iostream>
+
 
 Enemy::Enemy(int health, float speed, const std::vector<Vector2>& path)
     : health(health), speed(speed), currentPathIndex(0) {
@@ -44,6 +46,7 @@ void Enemy::Move(float deltaTime) {
 
 void Enemy::TakeDamage(int damage) {
     health -= damage;
+    std::cout<<health<<std::endl;
 }
 
 bool Enemy::IsAlive() const {
@@ -61,4 +64,8 @@ Vector2 Enemy::AdjustPositionToCenter(const Vector2& cellPosition) const {
         cellPosition.x + cellSize / 2.0f,
         cellPosition.y + cellSize / 2.0f
     };
+}
+
+Vector2 Enemy::GetPosition()const{
+    return position;
 }

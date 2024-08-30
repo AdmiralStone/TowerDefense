@@ -28,6 +28,9 @@ void GameManager::Init(){
     if(!enemyPath.empty()){
         enemies.push_back(Enemy(100,50.0f,enemyPath));
     }
+
+    // Create a tower for testing
+    towers.push_back(Tower(Vector2{200,200} , 100.0f, 10, 1.0f));
 }
 
 void GameManager::Update(){
@@ -38,6 +41,11 @@ void GameManager::Update(){
         if(enemy.IsAlive()){
             enemy.Move(deltaTime);
         }
+    }
+
+    // Update towers
+    for(auto& tower: towers){
+        tower.Update(deltaTime,enemies);
     }
 }
 
@@ -55,17 +63,23 @@ void GameManager::Draw(){
         }
     }
 
+    // Draw towers
+    for(const auto& tower: towers){
+        tower.Draw();
+    }
+
     EndDrawing();
 }
 
 void GameManager::Run(){
     Init();
-
+    
     // Main game loop
     while(!WindowShouldClose()){
         Update();
         Draw();
     }
+    
 
     CloseWindow();
 

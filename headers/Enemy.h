@@ -16,6 +16,7 @@ class Enemy{
         void Draw() const;
 
         Vector2 AdjustPositionToCenter(const Vector2& cellPosition)const;
+        Vector2 GetPosition()const;
 
 
     private:

@@ -5,6 +5,7 @@
 #include <vector>
 #include "Map.h"
 #include "Enemy.h"
+#include "Tower.h"
 
 class GameManager{
     public:
@@ -19,6 +20,7 @@ class GameManager{
     private:
         Map* map; // Pointer to Map instance
         std::vector<Enemy> enemies; // List of enemies in the game
+        std::vector<Tower> towers;
         
 };
 
