@@ -3,7 +3,8 @@
 #include "raylib.h"
 #include <iostream>
 
-GameManager::GameManager(){
+GameManager::GameManager()
+    :playerResources(200){// Initialize player resources
     // Constructor logic if needed
     map = std::make_unique<Map>(25,18); // Example map of 25x18 tiles
     
@@ -35,6 +36,9 @@ void GameManager::Init(){
 
 void GameManager::Update(){
     float deltaTime = GetFrameTime(); // Time between frames
+
+    // Update UI for user input and tower placement
+    ui.Update(towers, playerResources);
 
     // Update enemies
     for(auto& enemy:enemies){
@@ -80,6 +84,9 @@ void GameManager::Draw(){
     for(const auto& projectile:projectiles){
         projectile.Draw();
     }
+
+    // Draw UI elements
+    ui.Draw();
 
     EndDrawing();
 }

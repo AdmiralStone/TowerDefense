@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Tower.h"
 #include "Projectile.h"
+#include "UI.h"
 
 class GameManager{
     public:
@@ -24,7 +25,8 @@ class GameManager{
         std::vector<Enemy> enemies;          // List of enemies in the game
         std::vector<Tower> towers;           // List of towers in game
         std::vector<Projectile> projectiles; // List of projectiles in the game
-        
+        UI ui;                               // Instance of the UI Class
+        int playerResources;                 // Player resources
 };
 
 

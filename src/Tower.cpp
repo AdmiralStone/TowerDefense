@@ -1,7 +1,7 @@
 // src/Tower.cpp
 #include "Tower.h"
-#include "raylib.h"
 #include "raymath.h"
+#include "raylib.h"
 
 Tower::Tower(Vector2 position, float range, int damage, float fireRate):
     position(position), range(range), damage(damage), fireRate(fireRate), cooldown(0.0f){}
